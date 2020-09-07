@@ -20,9 +20,12 @@ defmodule VirgilWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", VirgilWeb do
-  #   pipe_through :api
-  # end
+  scope "/api" do
+    pipe_through :api
+
+    get "/", Absinthe.Plug.GraphiQL, schema: VirgilWeb.Api.Schema, interface: :playground
+    post "/", Absinthe.Plug, schema: VirgilWeb.Api.Schema
+  end
 
   # Enables LiveDashboard only for development
   #
