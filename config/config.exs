@@ -10,6 +10,11 @@ use Mix.Config
 config :virgil,
   ecto_repos: [Virgil.Repo]
 
+config :virgil, :generators,
+  migration: true,
+  binary_id: true,
+  sample_binary_id: "11111111-1111-1111-1111-111111111111"
+
 # Configures the endpoint
 config :virgil, VirgilWeb.Endpoint,
   url: [host: "localhost"],
