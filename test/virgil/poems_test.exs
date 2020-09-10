@@ -29,6 +29,14 @@ defmodule Virgil.PoemsTest do
       assert Poems.get_poem!(poem.id) == poem
     end
 
+    # TODO: how best to do this...
+    # test "get_poem!/2 with true as second arg returns the poem with given id with comments" do
+    #   poem = poem_fixture()
+    #   assert Poems.get_poem!(poem.id, true) == poem
+
+    #   Virgil.FeedbackTest.comment_fixture
+    # end
+
     test "create_poem/1 with valid data creates a poem" do
       assert {:ok, %Poem{} = poem} = Poems.create_poem(@valid_attrs)
       assert poem.author == "some author"

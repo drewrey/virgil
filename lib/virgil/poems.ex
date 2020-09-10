@@ -35,7 +35,13 @@ defmodule Virgil.Poems do
       ** (Ecto.NoResultsError)
 
   """
-  def get_poem!(id), do: Repo.get!(Poem, id)
+  def get_poem!(id, nil), do: Repo.get!(Poem, id)
+  def get_poem!(id, _with_comment = true) do
+    # TODO: add left join
+    Repo.one from poem in Poem,
+      where: poem.id == ^id,
+      preload: [:comments]
+  end
 
   @doc """
   Creates a poem.

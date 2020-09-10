@@ -4,6 +4,8 @@ defmodule Virgil.Poems.Poem do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   schema "poems" do
+    has_many :comments, Virgil.Feedback.Comment
+
     field :author, :string
     field :text, :string
     field :title, :string
