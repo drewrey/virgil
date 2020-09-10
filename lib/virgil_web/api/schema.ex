@@ -1,6 +1,8 @@
 defmodule VirgilWeb.Api.Schema do
   use Absinthe.Schema
 
+  alias Virgil.Poems
+
   object :poem do
     field :id, non_null(:id)
     field :title, non_null(:string)
@@ -15,8 +17,8 @@ defmodule VirgilWeb.Api.Schema do
         arg :text, non_null(:string)
 
         resolve fn %{title: title, author: author, text: text}, _ ->
-          case Virgil.Poems.create_poem(%{title: title, author: author, text: text}) do
-            {:ok, poem} ->
+          case Poems.create_poem(%{title: title, author: author, text: text}) do
+            {:ok, poem = %Poems.Poem{}} ->
               {:ok, poem}
             _ ->
               {:error, nil}
@@ -34,7 +36,7 @@ defmodule VirgilWeb.Api.Schema do
 
     field :poems, non_null(list_of(:poem)) do
       resolve fn _, _ ->
-        {:ok, Virgil.Poems.list_poems()}
+        {:ok, Poems.list_poems()}
       end
     end
   end
