@@ -13,11 +13,6 @@ defmodule VirgilWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", VirgilWeb do
-    pipe_through :browser
-
-    get "/", PageController, :index
-  end
 
   # Other scopes may use custom stacks.
   scope "/api" do
@@ -41,5 +36,12 @@ defmodule VirgilWeb.Router do
       pipe_through :browser
       live_dashboard "/dashboard", metrics: VirgilWeb.Telemetry
     end
+  end
+
+  scope "/", VirgilWeb do
+    pipe_through :browser
+
+    get "/", PageController, :index
+    get "/*path", PageController, :index
   end
 end
